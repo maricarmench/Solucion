@@ -2,10 +2,8 @@
 Imports System.Threading
 Imports Studio.Vision.Telko.Backend.Service
 Imports System.Timers
-Imports Studio_Telko_Sync.EntityClasses
+Imports Studio.Phone.DAL.EntityClasses
 Imports System.Globalization
-'Imports System.IO
-
 Imports System.Diagnostics
 Imports System.Reflection
 
@@ -120,7 +118,6 @@ Public Class Form1
         Dim intEntityId As Integer
         Dim strNombreEntidad As String
         Dim strConexion_SV As String
-        Dim strConexion_STS As String
         Dim entitiesDis As IEnumerable(Of EntitiyDistribucionEntity) = Nothing
         Dim entitiesDisAg As IEnumerable(Of Studio.Vision.Telko.Shared.Entity_EntiyAgregVM) = Nothing
         Dim entitiesTenant As IEnumerable(Of TenantEntity) = Nothing
@@ -133,7 +130,6 @@ Public Class Form1
 
         ' SE OBTIENE LOS STRING DE CONEXION A LAS BASES DE DATOS
         strConexion_SV = ConfigurationManager.AppSettings("strConnDBStudio_Vision").ToString()
-        strConexion_STS = ConfigurationManager.AppSettings("strConnDBStudio_Telko_Sync").ToString()
 
         EventViewerMonitor.addToEventViewer("MonitorProcesos-Timer", "Inicio de operaciones", EventLogEntryType.Information)
         anotaMensaje("MonitorProcesos-Timer... Inicio de operaciones", True)
@@ -174,8 +170,8 @@ Public Class Form1
                     'EJECUTA EL PROCESO DE DISTRIBUCION
                     bolLoad = True
 
-                    If bolLoad Then bolLoad = EntidadesADistribuir.VerificarEntidadesADistribuir(strConexion_STS, bolDebug, entitiesDis)
-                    If bolLoad Then bolLoad = Tenant.VerificarTenant(strConexion_STS, bolDebug, entitiesTenant)
+                    If bolLoad Then bolLoad = EntidadesADistribuir.VerificarEntidadesADistribuir(strConexion_SV, bolDebug, entitiesDis)
+                    If bolLoad Then bolLoad = Tenant.VerificarTenant(strConexion_SV, bolDebug, entitiesTenant)
 
                     If bolLoad Then
                         'Recorro la Lista para consultar por cada cliente su ultima fecha de actualización
@@ -184,7 +180,9 @@ Public Class Form1
                                 intTenantID = t.Id
                                 intProveedor = t.IdProveedorDrako
                                 strCliente = t.Nombre
-                                If (t.FechaActualizacion Is Nothing) Then
+                                '27/10/2021 If (t.FechaActualizacion Is Nothing) Then
+                                '29/10/2021 If (CType(t.FechaActualizacion, Date?) Is Nothing) Then
+                                If (CType(t.FechaActualizacion, Date?) = "#1/1/0001 12:00:00 AM#") Then
                                     dtfechaActualizacion = fechatemp
                                 Else
                                     dtfechaActualizacion = t.FechaActualizacion
@@ -199,7 +197,7 @@ Public Class Form1
 
                                         If intOrden >= 1 Then
                                             'Consulto si esta Entidad tiene Entidades Hijas a distribuir...
-                                            If bolLoad Then bolLoad = DistribucionAgregada.FiltrarEntidadesADistribuirAgregadas(strConexion_STS, bolDebug, intEntityId, entitiesDisAg)
+                                            If bolLoad Then bolLoad = DistribucionAgregada.FiltrarEntidadesADistribuirAgregadas(strConexion_SV, bolDebug, intEntityId, entitiesDisAg)
                                             If entitiesDisAg.Count > 0 Then
                                                 bolEntidadHija = True
                                             Else
@@ -207,11 +205,11 @@ Public Class Form1
                                             End If
 
                                             ' SE PROCESAN LAS ENTIDADES A DISTRIBUIR Y SE SERIALIZA EL DTO A JSON
-                                            bolLoad = ProcesarEntidades.ProcesarEntidadesADistribuir(strConexion_SV, strConexion_STS, bolDebug, strNombreEntidad, dtfechaActualizacion, bolEntidadHija, intEntityId, entitiesDisAg, jsonDTO, JsonDTOs, JsonDTOsHija)
+                                            bolLoad = ProcesarEntidades.ProcesarEntidadesADistribuir(strConexion_SV, strConexion_SV, bolDebug, strNombreEntidad, dtfechaActualizacion, bolEntidadHija, intEntityId, entitiesDisAg, jsonDTO, JsonDTOs, JsonDTOsHija)
 
                                             If bolLoad And jsonDTO <> "" Then
                                                 ' SE INSERTA EL REGISTRO EN LA TABLA DistribucionRegistro DE LA BASE DE DATOS Studio_Telko_Sync
-                                                bolLoad = Vision.Telko.Shared.DistribucionRegistro.InsertarDistribucionRegistro(strConexion_STS, bolDebug, intEntityId, jsonDTO, bolEntidadHija, JsonDTOs, JsonDTOsHija, intTenantID, ContadorAgregada)
+                                                bolLoad = Vision.Telko.Shared.DistribucionRegistro.InsertarDistribucionRegistro(strConexion_SV, bolDebug, intEntityId, jsonDTO, bolEntidadHija, JsonDTOs, JsonDTOsHija, intTenantID, ContadorAgregada)
                                                 ContadorRegistros = ContadorRegistros + 1
                                                 ContadorRegistros = ContadorRegistros + ContadorAgregada
                                             End If
@@ -226,7 +224,7 @@ Public Class Form1
                                 EventViewerMonitor.addToEventViewer("MonitorProcesos-Timer", "Se procesaron " & ContadorRegistros & " Archivos para el TenantId: " & intTenantID, EventLogEntryType.Information)
                                 anotaMensaje("MonitorProcesos-Timer... Se procesaron " & ContadorRegistros & " Archivos para el TenantId: " & intTenantID, True)
                                 If ContadorRegistros > 0 Then
-                                    If bolLoad Then bolLoad = Tenant.ActualizarFechaTenant(strConexion_STS, bolDebug, intTenantID)
+                                    If bolLoad Then bolLoad = Tenant.ActualizarFechaTenant(strConexion_SV, bolDebug, intTenantID)
                                     ContadorRegistros = 0
                                     ContadorAgregada = 0
                                 End If

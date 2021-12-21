@@ -19,7 +19,7 @@
     'NOTA: el Diseñador de componentes requiere el siguiente procedimiento
     'Se puede modificar usando el Diseñador de componentes.
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ServiceProcessInstaller1 = New System.ServiceProcess.ServiceProcessInstaller()
         Me.ServiceInstaller1 = New System.ServiceProcess.ServiceInstaller()
@@ -32,7 +32,7 @@
         '
         'ServiceInstaller1
         '
-        Me.ServiceInstaller1.Description = "Servicio de recepción de datos a actualizar"
+        Me.ServiceInstaller1.Description = "Servicio de Reposición Automática--Recepción de datos a actualizar"
         Me.ServiceInstaller1.DisplayName = "MonitorCliente"
         Me.ServiceInstaller1.ServiceName = "MonitorCliente"
         '

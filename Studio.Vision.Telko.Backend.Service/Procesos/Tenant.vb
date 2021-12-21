@@ -1,5 +1,7 @@
-﻿Imports Studio_Telko_Sync.EntityClasses
-Imports Studio_Telko_Sync.HelperClasses
+﻿'27/10/2021 Imports Studio_Telko_Sync.EntityClasses
+'27/10/2021 Imports Studio_Telko_Sync.HelperClasses
+Imports Studio.Phone.DAL.EntityClasses
+Imports Studio.Phone.DAL.HelperClasses
 
 Public Class Tenant
     Shared Tenant As TenantEntity = Nothing
@@ -7,8 +9,10 @@ Public Class Tenant
     Public Shared Function VerificarTenant(ByVal strConexion As String, ByVal bolDebug As Boolean, ByRef entitiesTenant As IEnumerable(Of TenantEntity)) As Boolean
         Try
             'Consulto la tabla Tenant de STS para consultar Clientes y su ultima fecha de actualización
-            Using adapterTenant As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
-                Dim metaData = New Studio_Telko_Sync.Linq.LinqMetaData(adapterTenant)
+            '27/102021 Using adapterTenant As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterTenant As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
+                '27/10/2021 Dim metaData = New Studio_Telko_Sync.Linq.LinqMetaData(adapterTenant)
+                Dim metaData As New Phone.DAL.Linq.LinqMetaData(adapterTenant)
                 Dim q = (From c In metaData.Tenant Select c Where c.Activo = True)
                 entitiesTenant = q.ToList()
             End Using
@@ -26,7 +30,8 @@ Public Class Tenant
             Dim bucket As New RelationPredicateBucket(TenantFields.Id = intTenantID)
             Dim updateValuesTenant As New TenantEntity()
             updateValuesTenant.FechaActualizacion = DateTime.Now
-            Using adapterTenant As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            'Using adapterTenant As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterTenant As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                 Dim amountUpdated As Integer = adapterTenant.UpdateEntitiesDirectly(updateValuesTenant, bucket)
             End Using
             Return True

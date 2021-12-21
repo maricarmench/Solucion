@@ -2,15 +2,16 @@
 Imports System.Net.Http
 Imports System.Web.Http
 Imports SD.LLBLGen.Pro.ORMSupportClasses
-Imports Studio_Telko_Sync.EntityClasses
-Imports Studio_Telko_Sync.HelperClasses
+'29/10/2021 Imports Studio_Telko_Sync.EntityClasses
+'29/10/2021 Imports Studio_Telko_Sync.HelperClasses
 
 Namespace Controllers
     Public Class DistribucionRegistroController
         Inherits ApiController
         Dim httpResponseMessage As HttpResponseMessage
         Dim strMessage As String
-        Dim strConexion_STS = ConfigurationManager.AppSettings("strConnDBStudio_Telko_Sync").ToString()
+        ' 29/10/2021 Dim strConexion_STS = ConfigurationManager.AppSettings("strConnDBStudio_Telko_Sync").ToString()
+        Dim strConexion_SV = ConfigurationManager.AppSettings("strConnDBStudio_Vision").ToString()
 
         ' GET: api/DistribucionRegistro
         Public Function GetValues() As IEnumerable(Of String)
@@ -20,7 +21,7 @@ Namespace Controllers
         ' GET: api/DistribucionRegistro/5
         Public Function GetValue(ByVal id As Integer, ByVal TopeRegistros As Integer) As String
             Try
-                strMessage = Studio.Vision.Telko.Shared.DistribucionRegistro.GetDistribucionRegistro(strConexion_STS, id, TopeRegistros)
+                strMessage = Studio.Vision.Telko.Shared.DistribucionRegistro.GetDistribucionRegistro(strConexion_SV, id, TopeRegistros)
                 If (strMessage = "") Then
                     httpResponseMessage = Request.CreateErrorResponse(HttpStatusCode.NotFound, "id inválido")
                     strMessage = httpResponseMessage.ToString().Substring(0, httpResponseMessage.ToString().IndexOf("Version") - 3)
@@ -51,7 +52,7 @@ Namespace Controllers
             Try
                 Dim gudNumeroGuid As Guid
                 gudNumeroGuid = Guid.Parse(id.ToString())
-                Studio.Vision.Telko.Shared.DistribucionRegistro.DeleteDistribucionRegistro(strConexion_STS, gudNumeroGuid)
+                Studio.Vision.Telko.Shared.DistribucionRegistro.DeleteDistribucionRegistro(strConexion_SV, gudNumeroGuid)
                 'Version
                 httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK, "OK")
                 strMessage = httpResponseMessage.ToString().Substring(0, httpResponseMessage.ToString().IndexOf("Version") - 3)

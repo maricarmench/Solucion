@@ -313,14 +313,6 @@
       <Project>{2ef1e389-7958-4e96-89fc-0f7729fae9fa}</Project>
       <Name>Studio.Vision.Telko.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sync\Studio_Telko_Sync.csproj">
-      <Project>{10cc87f2-dade-4e39-8989-bbda1152f357}</Project>
-      <Name>Studio_Telko_Sync</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sync\Studio_Telko_SyncDBSpecific.csproj">
-      <Project>{f86b0e70-2d49-4800-a1be-9f256799b6fe}</Project>
-      <Name>Studio_Telko_SyncDBSpecific</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

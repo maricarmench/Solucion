@@ -54,24 +54,27 @@
     </Reference>
     <Reference Include="SD.LLBLGen.Pro.LinqSupportClasses.NET35, Version=3.5.0.0, Culture=neutral, PublicKeyToken=ca73b74ba4e3ff27, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\SD.LLBLGen.Pro.LinqSupportClasses.NET35.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\SD.LLBLGen.Pro.LinqSupportClasses.NET35.dll</HintPath>
     </Reference>
     <Reference Include="SD.LLBLGen.Pro.ORMSupportClasses.NET20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=ca73b74ba4e3ff27, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\SD.LLBLGen.Pro.ORMSupportClasses.NET20.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\SD.LLBLGen.Pro.ORMSupportClasses.NET20.dll</HintPath>
     </Reference>
     <Reference Include="SD.LLBLGen.Pro.QuerySpec, Version=3.5.0.0, Culture=neutral, PublicKeyToken=ca73b74ba4e3ff27, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\SD.LLBLGen.Pro.QuerySpec.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\SD.LLBLGen.Pro.QuerySpec.dll</HintPath>
     </Reference>
-    <Reference Include="Studio.Net.BLL">
-      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\Telko_29-06-21\Studio.Vision.Telko.FrontEnd.Service\bin\Debug\Studio.Net.BLL.dll</HintPath>
+    <Reference Include="Studio.Net.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\Studio.Net.BLL.dll</HintPath>
     </Reference>
-    <Reference Include="Studio.Phone.DAL">
-      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\RESPALDO ORIGINAL FUENTES MARCELO\Dll Actualizadas 15-06-21\Studio.Phone.DAL.dll</HintPath>
+    <Reference Include="Studio.Phone.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\Studio.Phone.DAL.dll</HintPath>
     </Reference>
-    <Reference Include="Studio.Phone.DALDBSpecific">
-      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\RESPALDO ORIGINAL FUENTES MARCELO\Dll Actualizadas 15-06-21\Studio.Phone.DALDBSpecific.dll</HintPath>
+    <Reference Include="Studio.Phone.DALDBSpecific, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\TELKO\Reposicion Automática\FUENTE MARCELO 31-08-21\Vision\References\Studio.Phone.DALDBSpecific.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

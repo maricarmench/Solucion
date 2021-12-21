@@ -162,6 +162,10 @@ Public Class ProcesarEntidades
                             Select Case strNombreEntidad
                                  '// PROCESO DE ACTUALIZACION DE RUBRO
                                 Case "Rubro"
+                                    ''json = json.Replace(@"\""", "s");
+                                    ''json = json.Replace(@"\", "");
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -172,6 +176,8 @@ Public Class ProcesarEntidades
 
                                  '// PROCESO DE ACTUALIZACION DE ArticuloTipo
                                 Case "ArticuloTipo"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    'strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -181,6 +187,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION MARCA
                                 Case "Marca"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -190,6 +198,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION MODELO
                                 Case "Modelo"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -199,6 +209,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION ARTICULOCLASE
                                 Case "ArticuloClase"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -208,6 +220,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION NIVEL
                                 Case "Nivel"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -217,6 +231,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION UNIDAD
                                 Case "Unidad"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -226,6 +242,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION PROCEDENCIA
                                 Case "Procedencia"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -235,6 +253,12 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION AAtributoPlantilla
                                 Case "AAtributoPlantilla"
+                                    ''json = json.Replace(@"\""", "s");
+                                    ''json = json.Replace(@"\", "");
+
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    strJsonEntidad = strJsonEntidad.Replace("\", "")
+
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -244,6 +268,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION AAtributoPlantillaValor
                                 Case "AAtributoPlantillaValor"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -253,6 +279,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION Articulo
                                 Case "Articulo"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -262,6 +290,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                  '// PROCESO DE ACTUALIZACION Articulo_Impuesto
                                 Case "Articulo_Impuesto"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -271,6 +301,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                 '// PROCESO DE ACTUALIZACION Articulo_AAtributoPlantilla
                                 Case "Articulo_AAtributoPlantilla"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -280,6 +312,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                 '// PROCESO DE ACTUALIZACION ArticuloVariante_Combinacion
                                 Case "ArticuloVariante_Combinacion"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad.TrimEnd())).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -289,6 +323,8 @@ Public Class ProcesarEntidades
                                     ContadorGeneral = ContadorGeneral + 1
                                 '// PROCESO DE ACTUALIZACION MARCA_MODELO
                                 Case "Marca_Modelo"
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\""", "s")
+                                    ''strJsonEntidad = strJsonEntidad.Replace("\", "")
                                     ' DesSerializing the object Json string to DTO
                                     Dim strJsonEnt = JsonConvert.DeserializeObject(Trim(strJsonEntidad)).ToString()
                                     If CuentaRegistros And CuentaRegistrosInterno Then
@@ -728,17 +764,7 @@ Public Class ProcesarEntidades
                                     ObjOrden = CheckDBNull(ObjOrden, item.ArtClsOrd)
                                     ObjDocumentoTipoIdDefectoSalida = CheckDBNull(ObjDocumentoTipoIdDefectoSalida, item.DocTpoIdSal)
                                     ObjDocumentoTipoIdDefectoEntrada = CheckDBNull(ObjDocumentoTipoIdDefectoEntrada, item.DocTpoIdEnt)
-                                    'If item.DocTpoIdSal.HasValue Then
-                                    '    ObjDocumentoTipoIdDefectoSalida = item.DocTpoIdSal
-                                    'Else
-                                    '    ObjDocumentoTipoIdDefectoSalida = Nothing
-                                    'End If
-                                    'If item.DocTpoIdEnt.HasValue Then
-                                    '    ObjDocumentoTipoIdDefectoEntrada = item.DocTpoIdEnt
-                                    'Else
-                                    '    ObjDocumentoTipoIdDefectoEntrada = Nothing
-                                    'End If
-                                    'Dim isNullNotNullable = order.Fields.GetCurrentValue(CInt(OrderFields.ShippingDate)) Is Nothing
+
                                     Dim updateRegistroArticuloClase As ArticuloClaseEntity = Nothing
                                     Dim filterBucketArticuloClase As RelationPredicateBucket = New RelationPredicateBucket(ArticuloClaseFields.Id = item.ArtClsId)
                                     If (ObjDocumentoTipoIdDefectoSalida IsNot Nothing) And (ObjDocumentoTipoIdDefectoEntrada IsNot Nothing) And (ObjOrden IsNot Nothing) Then

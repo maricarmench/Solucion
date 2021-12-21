@@ -1,13 +1,16 @@
 ﻿Imports Newtonsoft.Json
 Imports SD.LLBLGen.Pro.ORMSupportClasses
-Imports Studio_Telko_Sync.EntityClasses
-Imports Studio_Telko_Sync.HelperClasses
+'27/10/2021 Imports Studio_Telko_Sync.EntityClasses
+'27/10/2021 Imports Studio_Telko_Sync.HelperClasses
+Imports Studio.Phone.DAL.HelperClasses
+Imports Studio.Phone.DAL.EntityClasses
 Public Class DistribucionRegistro
     'Funcion para ingresar registros en la tabla DistribucionRegistro de STS
     Public Shared Function InsertarDistribucionRegistro(ByVal strConexion As String, ByVal bolDebug As Boolean, ByVal intEntityId As Integer, ByVal jsonDTO As String, ByVal bnlTieneHija As Boolean, ByVal JsonDTOs() As String, ByVal JsonDTOsHija() As String, ByVal intTenantID As Integer, ByRef Contador As Integer) As Boolean
         Try
             Contador = 0
-            Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            '27/10/2021 Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterDisReg As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                 'SE INSERTA EN LA TABLA DistribucionRegistro de STS
                 Dim DistribucionRegistro As New DistribucionRegistroEntity()
 
@@ -30,7 +33,8 @@ Public Class DistribucionRegistro
                     intEntityId = Convert.ToUInt16(Cadena(0))
                     jsonDTO = Cadena(1)
 
-                    Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+                    '27/10/2021 Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+                    Using adapterDisReg As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                         'SE INSERTA EN LA TABLA DistribucionRegistro de STS
                         Dim DistribucionRegistro As New DistribucionRegistroEntity()
                         DistribucionRegistro.EntityId = intEntityId
@@ -64,12 +68,14 @@ Public Class DistribucionRegistro
         Try
             ' setup filter. 
             Dim filter As New RelationPredicateBucket(DistribucionRegistroFields.TenantId = idTenant)
-            Dim DistReg As New Studio_Telko_Sync.HelperClasses.EntityCollection(Of DistribucionRegistroEntity)()
+            '27/10/2021 Dim DistReg As New Studio_Telko_Sync.HelperClasses.EntityCollection(Of DistribucionRegistroEntity)()
+            Dim DistReg As New Studio.Phone.DAL.HelperClasses.EntityCollection(Of DistribucionRegistroEntity)()
             Dim gudNumeroGuid As Guid = Nothing
             gudNumeroGuid = Guid.NewGuid()
 
             ' fetch them using a DataAccessAdapter instance
-            Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            '27/10/2021 Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterDisReg As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                 adapterDisReg.FetchEntityCollection(DistReg, filter)
             End Using
 
@@ -136,7 +142,8 @@ Public Class DistribucionRegistro
             Dim updateRegistro As DistribucionRegistroEntity = New DistribucionRegistroEntity()
             updateRegistro.PaqueteGuid = gudNumeroGuid
 
-            Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            '27/10/2021 Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterDisReg As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                 ' update it
                 adapterDisReg.UpdateEntitiesDirectly(updateRegistro, filterBucket)
             End Using
@@ -152,7 +159,8 @@ Public Class DistribucionRegistro
     Public Shared Sub DeleteDistribucionRegistro(ByVal strConexion As String, ByVal gudNumeroGuid As Guid)
         Try
             Dim filterBucket As RelationPredicateBucket = New RelationPredicateBucket(DistribucionRegistroFields.PaqueteGuid = gudNumeroGuid)
-            Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            '27/10/2021 Using adapterDisReg As New Studio_Telko_Sync.DatabaseSpecific.DataAccessAdapter(strConexion)
+            Using adapterDisReg As New Studio.Phone.DAL.DatabaseSpecific.DataAccessAdapter(strConexion)
                 ' delete it
                 adapterDisReg.DeleteEntitiesDirectly("DistribucionRegistroEntity", filterBucket)
             End Using

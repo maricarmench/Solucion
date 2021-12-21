@@ -145,7 +145,7 @@ Public Class MonitorCliente
         Dim bolInicioOperaciones As Boolean = False
         Dim bolNoCargar As Boolean = True
         Dim strConexion_SV As String
-        Dim strConexion_STS As String
+        Dim strConexion_TSV As String
         Dim IdGuids As String = ""
         Dim ArrGuid() As String
         Dim StrGuid As Object
@@ -155,7 +155,7 @@ Public Class MonitorCliente
 #End Region
         ' SE OBTIENE LOS STRING DE CONEXION A LAS BASES DE DATOS
         strConexion_SV = ConfigurationManager.AppSettings("strConnDBStudio_Vision").ToString()
-        strConexion_STS = ConfigurationManager.AppSettings("strConnDBStudio_Telko_Sync").ToString()
+        strConexion_TSV = ConfigurationManager.AppSettings("strConnTelko_Vision").ToString()
 
         EventViewerMonitor.addToEventViewer("MonitorCliente-Timer", "Inicio de operaciones", EventLogEntryType.Information)
         Studio.Vision.Telko.Shared.Funciones.RegistrarMsjLog("MonitorCliente-Timer... Inicio de operaciones", True)
@@ -196,22 +196,33 @@ Public Class MonitorCliente
 
                     'EJECUTA EL PROCESO DE DISTRIBUCION
                     bolLoad = True
-
                     ResultGet = ""
-                    ResultGet = MetodosServicio.GetPost(strUrlServicioWeb, intTenantid, intTopeGuid, bolDebug)
+                    ''*** SE ELIMINO EL USO DEL SERVICIO WEB ****
+                    ''ResultGet = MetodosServicio.GetPost(strUrlServicioWeb, intTenantid, intTopeGuid, bolDebug)
+                    ''If ResultGet = "FALLO" Then bolLoad = False
+                    ''*** FIN DE SE ELIMINO EL USO DEL SERVICIO WEB ****
+
+                    ResultGet = MetodosServicio.GetTrama(strConexion_TSV, intTenantid, intTopeGuid, bolDebug)
                     If ResultGet = "FALLO" Then bolLoad = False
 
                     If bolLoad Then
                         ' SE PROCESAN LAS ENTIDADES A DISTRIBUIR Y SE Des-SERIALIZA EL JSON a DTO
-                        bolLoad = ProcesarEntidades.ProcesarEntidadesAActualizar(strConexion_SV, strConexion_STS, bolDebug, ResultGet, IdGuids, CuentaArchivo)
+                        bolLoad = ProcesarEntidades.ProcesarEntidadesAActualizar(strConexion_SV, strConexion_SV, bolDebug, ResultGet, IdGuids, CuentaArchivo)
 
                         If bolLoad Then
                             If IdGuids <> "" Then
-                                'Split value in variable IdGuids using delimiting character ;
+                                'Split value in variable IdGuids using delimiting character;
                                 ArrGuid = Split(IdGuids, ";")
                                 'Iterate through each substring
                                 For Each StrGuid In ArrGuid
-                                    ResultDelete = MetodosServicio.DeleteValue(strUrlServicioWeb, Trim(StrGuid), bolDebug)
+                                    ''*** SE ELIMINO EL USO DEL SERVICIO WEB ****
+                                    ''ResultDelete = MetodosServicio.DeleteValue(strUrlServicioWeb, Trim(StrGuid), bolDebug)
+                                    ''If ResultDelete = "FALLO" Then bolLoad = False
+                                    ''*** FIN DE SE ELIMINO EL USO DEL SERVICIO WEB ***
+
+                                    Dim gudNumeroGuid As Guid
+                                    gudNumeroGuid = Guid.Parse(Trim(StrGuid))
+                                    ResultDelete = MetodosServicio.DeleteTrama(strConexion_TSV, gudNumeroGuid, bolDebug)
                                     If ResultDelete = "FALLO" Then bolLoad = False
                                 Next
                             End If

@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports Newtonsoft.Json
 
 Public Class MetodosServicio
     Public Shared Function GetPost(ByVal url As String, ByVal miID As Integer, ByVal miTope As Integer, ByVal bolDebug As Boolean) As String
@@ -47,6 +48,33 @@ Public Class MetodosServicio
             ' Clean up the streams and the response.
             reader.Close()
             response.Close()
+            Return responseFromServer
+        Catch ex As Exception
+            EventViewerMonitor.addToEventViewer("MonitorCliente-MetodosServicio", "Ha ocurrido un error en el monitor de cliente del método DeleteValue: Error: " & ex.Message, EventLogEntryType.Error)
+            Studio.Vision.Telko.Shared.Funciones.RegistrarMsjLog("MonitorCliente-MetodosServicio... Ha ocurrido un error en el monitor de cliente del método DeleteValue: Error: " & ex.Message, True)
+            Return responseFromServer = "FALLO"
+        End Try
+    End Function
+    Public Shared Function GetTrama(ByVal Conexion As String, ByVal miID As Integer, ByVal miTope As Integer, ByVal bolDebug As Boolean) As String
+        Dim responseFromServer As String = ""
+        Dim strMessage As String
+        Try
+
+            strMessage = Studio.Vision.Telko.Shared.DistribucionRegistro.GetDistribucionRegistro(Conexion, miID, miTope)
+            responseFromServer = JsonConvert.SerializeObject(strMessage)
+            Return responseFromServer
+        Catch ex As Exception
+            EventViewerMonitor.addToEventViewer("MonitorCliente-MetodosServicio", "Ha ocurrido un error en el monitor de cliente del método GetTrama: Error: " & ex.Message, EventLogEntryType.Error)
+            Studio.Vision.Telko.Shared.Funciones.RegistrarMsjLog("MonitorCliente-MetodosServicio... Ha ocurrido un error en el monitor de cliente del método GetTrama: Error: " & ex.Message, True)
+            Return responseFromServer = "FALLO"
+        End Try
+    End Function
+
+    Public Shared Function DeleteTrama(ByVal Conexion As String, ByVal miGUID As Guid, ByVal bolDebug As Boolean) As String
+        Dim responseFromServer As String = ""
+        Try
+            Studio.Vision.Telko.Shared.DistribucionRegistro.DeleteDistribucionRegistro(Conexion, miGUID)
+            responseFromServer = "OK"
             Return responseFromServer
         Catch ex As Exception
             EventViewerMonitor.addToEventViewer("MonitorCliente-MetodosServicio", "Ha ocurrido un error en el monitor de cliente del método DeleteValue: Error: " & ex.Message, EventLogEntryType.Error)
